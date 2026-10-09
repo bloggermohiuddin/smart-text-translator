@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Text Translator — History</title>
+  <link rel="stylesheet" href="history.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <div class="title-block">
+        <h1>Translation History</h1>
+        <p id="countLine">Loading…</p>
+      </div>
+      <div class="header-actions">
+        <button id="openSettings" class="btn ghost" type="button">Settings</button>
+        <button id="clearAll" class="btn danger-ghost" type="button">Clear all</button>
+      </div>
+    </header>
+
+    <div class="search-row">
+      <input type="search" id="search" placeholder="Search original or translated text…" />
+    </div>
+
+    <main id="list" class="list"></main>
+
+    <div id="emptyState" class="empty" hidden>
+      <svg viewBox="0 0 24 24" width="44" height="44" aria-hidden="true"><path fill="currentColor" d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6a7 7 0 1 1 7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+      <p>No translations yet.</p>
+      <small>Enable history in Settings, then select text on any webpage to translate it.</small>
+    </div>
+  </div>
+
+  <script src="../shared/constants.js"></script>
+  <script src="../shared/utils.js"></script>
+  <script src="../shared/storage.js"></script>
+  <script src="history.js"></script>
+</body>
+</html>

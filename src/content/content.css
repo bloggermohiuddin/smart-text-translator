@@ -1,0 +1,322 @@
+/* Smart Text Translator — floating popup styles.
+ * Loaded INSIDE a shadow root, so these rules never leak into the page
+ * and page styles never leak in. All selectors are scoped to .stt-popup.
+ */
+
+:host {
+  all: initial;
+}
+
+.stt-popup {
+  /* Light theme (default) */
+  --stt-bg: #ffffff;
+  --stt-bg-subtle: #f4f5f7;
+  --stt-text: #1f2329;
+  --stt-text-dim: #6b7280;
+  --stt-border: #e5e7eb;
+  --stt-accent: #1a73e8;
+  --stt-accent-hover: #1765cc;
+  --stt-accent-soft: rgba(26, 115, 232, 0.12);
+  --stt-error: #d93025;
+  --stt-error-soft: rgba(217, 48, 37, 0.1);
+  --stt-shadow: 0 6px 24px rgba(15, 23, 42, 0.16), 0 2px 6px rgba(15, 23, 42, 0.08);
+  --stt-btn-hover: #eef1f4;
+
+  position: absolute;
+  z-index: 2147483647;
+  width: 320px;
+  max-width: 92vw;
+  box-sizing: border-box;
+  background: var(--stt-bg);
+  color: var(--stt-text);
+  border: 1px solid var(--stt-border);
+  border-radius: 12px;
+  box-shadow: var(--stt-shadow);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, 'Noto Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+  animation: stt-pop-in 120ms ease-out;
+}
+
+.stt-popup[data-theme='dark'] {
+  --stt-bg: #202124;
+  --stt-bg-subtle: #2b2c30;
+  --stt-text: #e8eaed;
+  --stt-text-dim: #9aa0a6;
+  --stt-border: #3c4043;
+  --stt-accent: #8ab4f8;
+  --stt-accent-hover: #a8c7fa;
+  --stt-accent-soft: rgba(138, 180, 248, 0.16);
+  --stt-error: #f28b82;
+  --stt-error-soft: rgba(242, 139, 130, 0.14);
+  --stt-shadow: 0 6px 24px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.4);
+  --stt-btn-hover: #33353a;
+}
+
+@keyframes stt-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---------- header ---------- */
+.stt-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px 0 12px;
+  min-height: 22px;
+}
+
+.stt-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--stt-text-dim);
+  user-select: none;
+}
+
+.stt-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--stt-accent-soft);
+  color: var(--stt-accent);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.stt-spacer {
+  flex: 1;
+}
+
+/* ---------- icon buttons ---------- */
+.stt-icon-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--stt-text-dim);
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background 100ms ease, color 100ms ease;
+}
+
+.stt-icon-btn:hover {
+  background: var(--stt-btn-hover);
+  color: var(--stt-text);
+}
+
+.stt-icon-btn:focus-visible,
+.stt-primary-btn:focus-visible {
+  outline: 2px solid var(--stt-accent);
+  outline-offset: 1px;
+}
+
+.stt-icon-btn.is-active {
+  color: var(--stt-accent);
+  background: var(--stt-accent-soft);
+}
+
+.stt-icon-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+/* ---------- body ---------- */
+.stt-body {
+  padding: 6px 12px 10px;
+}
+
+.stt-original {
+  font-size: 12px;
+  color: var(--stt-text-dim);
+  max-height: 54px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 6px;
+  padding: 6px 8px;
+  background: var(--stt-bg-subtle);
+  border-radius: 8px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.stt-translation {
+  font-size: 14px;
+  color: var(--stt-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 220px;
+  overflow-y: auto;
+  user-select: text;
+}
+
+/* ---------- loading ---------- */
+.stt-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 6px;
+  color: var(--stt-text-dim);
+}
+
+.stt-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--stt-accent-soft);
+  border-top-color: var(--stt-accent);
+  animation: stt-spin 700ms linear infinite;
+  flex: none;
+}
+
+@keyframes stt-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- error ---------- */
+.stt-error {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 6px 0 4px;
+}
+
+.stt-error-msg {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  color: var(--stt-error);
+  background: var(--stt-error-soft);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.stt-error-msg svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  margin-top: 1px;
+  fill: currentColor;
+}
+
+.stt-error-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---------- buttons ---------- */
+.stt-primary-btn {
+  appearance: none;
+  border: none;
+  background: var(--stt-accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 100ms ease;
+}
+
+.stt-popup[data-theme='dark'] .stt-primary-btn {
+  color: #1f2329;
+}
+
+.stt-primary-btn:hover {
+  background: var(--stt-accent-hover);
+}
+
+.stt-ghost-btn {
+  appearance: none;
+  border: 1px solid var(--stt-border);
+  background: transparent;
+  color: var(--stt-text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 100ms ease;
+}
+
+.stt-ghost-btn:hover {
+  background: var(--stt-btn-hover);
+}
+
+.stt-ask {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0 2px;
+}
+
+/* ---------- footer (success actions) ---------- */
+.stt-footer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px 8px 12px;
+  border-top: 1px solid var(--stt-border);
+}
+
+.stt-footer .stt-badge {
+  margin-right: auto;
+}
+
+/* ---------- toast (copied feedback) ---------- */
+.stt-copied {
+  position: absolute;
+  top: 8px;
+  right: 40px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--stt-accent);
+  background: var(--stt-accent-soft);
+  border-radius: 999px;
+  padding: 2px 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease;
+}
+
+.stt-copied.show {
+  opacity: 1;
+}
+
+.stt-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}

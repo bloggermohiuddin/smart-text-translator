@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "Smart Text Translator",
+  "version": "1.0.0",
+  "description": "Select any text on any webpage and instantly translate it with Google Translate.",
+  "permissions": ["storage", "contextMenus"],
+  "host_permissions": ["https://translate.googleapis.com/*"],
+  "background": {
+    "service_worker": "src/background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "src/shared/constants.js",
+        "src/shared/utils.js",
+        "src/shared/storage.js",
+        "src/content/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "Smart Text Translator",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "src/options/options.html",
+  "commands": {
+    "translate-selection": {
+      "suggested_key": {
+        "default": "Alt+Shift+T"
+      },
+      "description": "Translate the current text selection"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/content/content.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
