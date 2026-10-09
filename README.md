@@ -72,3 +72,7 @@ src/
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the development and pull request guidelines.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
